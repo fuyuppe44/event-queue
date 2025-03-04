@@ -1,0 +1,536 @@
+.App {
+  text-align: center;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  color: #333;
+}
+
+h2 {
+  color: #555;
+}
+
+h3 {
+  margin-top: 20px;
+  color: #666;
+}
+
+nav {
+  margin: 10px 0;
+}
+
+nav a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #007bff;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+  margin: 20px auto;
+}
+
+form div {
+  margin: 10px 0;
+}
+
+input {
+  padding: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+button {
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+button:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+/* Display Page Container */
+.display-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f5f6f5; /* Light gray background */
+  font-family: 'Arial', sans-serif;
+}
+
+/* Header */
+.header {
+  background-color: #003087; /* MOF dark blue */
+  color: white;
+  padding: 15px 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+.header-logo {
+  height: 50px; /* Adjust based on logo size */
+  width: auto;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 24px;
+  text-align: center;
+  color:white;
+}
+
+/* Main Content */
+.main-content {
+  flex-grow: 1;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  padding: 20px;
+  background-color: white;
+  max-width: 1200px;
+  margin: 0 auto;
+  border-radius: 0 0 5px 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.section-title {
+  color: #003087; /* Blue accent */
+  font-size: 22px;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #003087;
+  padding-bottom: 5px;
+}
+
+.status-section, .queue-section, .admitted-section {
+  padding: 15px;
+}
+
+.status-card {
+  background-color: #e6f0fa; /* Light blue */
+  padding: 15px;
+  border-radius: 5px;
+  border: 1px solid #b3d4fc;
+}
+
+.status-card p {
+  margin: 5px 0;
+  line-height: 1.5;
+}
+
+.queue-list, .admitted-list {
+  list-style: none;
+  padding: 0;
+}
+
+.queue-item, .admitted-item {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  color: #333;
+}
+
+.queue-item:last-child, .admitted-item:last-child {
+  border-bottom: none;
+}
+
+.admitted-list .admitted-item {
+  color: #003087;
+  font-weight: bold;
+}
+
+.empty-message {
+  color: #666;
+  font-style: italic;
+}
+
+/* Footer */
+.footer {
+  background-color: #003087; /* Dark blue */
+  color: white;
+  padding: 15px;
+  text-align: center;
+  font-size: 14px;
+  margin-top: auto; /* Pushes footer to bottom */
+}
+
+.footer p {
+  margin: 0;
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+  .main-content {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .status-section {
+    grid-column: span 2;
+  }
+
+  .header-container {
+    justify-content: space-between;
+    flex-wrap: nowrap;
+  }
+}
+
+.admitted-list{
+  font-size: 28px;
+}
+
+.queue-list {
+  list-style: none;
+  padding: 0;
+  max-width: 600px;
+  margin: 10px auto;
+}
+
+.queue-list li {
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+.queue-list li:last-child {
+  border-bottom: none;
+}
+
+.admitted-list li {
+  color: #28a745; /* Green for admitted */
+}
+
+.control-button {
+  margin: 10px;
+  background-color: #dc3545; /* Red for admit action */
+}
+
+.control-button:hover:not(:disabled) {
+  background-color: #c82333;
+}
+
+.reset-button {
+  margin: 10px;
+  background-color: #ffc107; /* Yellow for reset action */
+}
+
+.reset-button:hover {
+  background-color: #e0a800;
+}
+
+.remove-button {
+  margin-left: 10px;
+  padding: 5px 10px;
+  background-color: #ff5733; /* Orange for remove action */
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.remove-button:hover {
+  background-color: #e04e2d;
+}
+.recall-button {
+  margin-left: 10px;
+  padding: 5px 10px;
+  background-color: #17a2b8; /* Cyan for recall action */
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.recall-button:hover {
+  background-color: #138496;
+}
+
+.admit-button {
+  margin-left: 10px;
+  padding: 5px 10px;
+  background-color: #28a745; /* Green for admit action */
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.admit-button:hover {
+  background-color: #218838;
+}
+.search-input {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #003087; /* Blue border from MOF-inspired design */
+  border-radius: 5px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.search-input::placeholder {
+  color: #666;
+  font-style: italic;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #0056b3; /* Darker blue on focus */
+  box-shadow: 0 0 5px rgba(0, 86, 179, 0.3);
+}
+
+/* Admin Page Container */
+.admin-page {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f5f6f5; /* Light gray background */
+  font-family: 'Arial', sans-serif;
+}
+
+/* Header */
+.admin-header {
+  background-color: #003087; /* Dark blue */
+  color: white;
+  padding: 15px;
+  border-radius: 5px 5px 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.admin-header h1 {
+  margin: 0;
+  font-size: 24px;
+  color:white;
+}
+
+.top-controls {
+  display: flex;
+  gap: 10px;
+}
+
+/* Main Content */
+.admin-main {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 0 0 5px 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Queue Sections */
+.queue-section {
+  padding: 15px;
+}
+
+.queue-section h2 {
+  color: #003087;
+  font-size: 20px;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #003087;
+  padding-bottom: 5px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #003087;
+  border-radius: 5px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.search-input::placeholder {
+  color: #666;
+  font-style: italic;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #0056b3;
+  box-shadow: 0 0 5px rgba(0, 86, 179, 0.3);
+}
+
+/* Queue Container */
+.queue-container {
+  max-height: 400px; /* Limit height with scroll */
+  overflow-y: auto;
+}
+
+/* Queue Card */
+.queue-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.queue-info {
+  flex-grow: 1;
+}
+
+.queue-number {
+  font-weight: bold;
+  color: #003087;
+}
+
+.queue-name {
+  margin-left: 10px;
+  font-weight: 500;
+}
+
+.queue-email {
+  margin-left: 10px;
+  color: #666;
+  font-size: 14px;
+}
+
+.queue-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* Admitted Card Variant */
+.admitted-card {
+  background-color: #e6f0fa; /* Light blue for admitted */
+  border-color: #b3d4fc;
+}
+
+/* Buttons */
+.control-button {
+  padding: 10px 15px;
+  background-color: #dc3545; /* Red */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.control-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.control-button:hover:not(:disabled) {
+  background-color: #c82333;
+}
+
+.reset-button {
+  padding: 10px 15px;
+  background-color: #ffc107; /* Yellow */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.reset-button:hover {
+  background-color: #e0a800;
+}
+
+.remove-button {
+  padding: 5px 10px;
+  background-color: #ff5733; /* Orange */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.remove-button:hover {
+  background-color: #e04e2d;
+}
+
+.admit-button {
+  padding: 5px 10px;
+  background-color: #28a745; /* Green */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.admit-button:hover {
+  background-color: #218838;
+}
+
+.recall-button {
+  padding: 5px 10px;
+  background-color: #17a2b8; /* Cyan */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.recall-button:hover {
+  background-color: #138496;
+}
+
+/* Empty Message */
+.empty-message {
+  color: #666;
+  font-style: italic;
+  text-align: center;
+  padding: 20px;
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+  .admin-main {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .admin-header {
+    flex-wrap: nowrap;
+  }
+}
+
+/* Blink and Highlight Effect */
+.blink-highlight {
+  animation: slowBlink 1s ease-in-out infinite; /* Slow blink for 3 seconds total */
+  /* background-color: #fff3cd; Light yellow highlight */
+  padding: 5px; /* Slight padding for highlight */
+  border-radius: 5px; /* Rounded corners */
+}
+
+/* Slow Blink Animation */
+@keyframes slowBlink {
+  0%, 100% { opacity: 1; }
+  30% { opacity: 0.5; }
+}
+
+/* Limit animation duration to 3 seconds */
+.admitted-item.blink-highlight {
+  animation-iteration-count: 5; /* 1s * 3 = 3 seconds */
+}
+
