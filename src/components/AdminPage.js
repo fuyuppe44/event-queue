@@ -50,7 +50,7 @@ function AdminPage({ queue, admitNext, admitSpecific, resetQueue, removeQueueEnt
             className="header-logo"
             onError={(e) => e.target.src = 'https://via.placeholder.com/150x50?text=MOF+Logo'}
           />
-          <h1>Queue Display / การแสดงคิว</h1>
+          <h1>Queue Management System / ระบบจัดการคิว</h1>
         </div>
       </header>
 
@@ -91,8 +91,8 @@ function AdminPage({ queue, admitNext, admitSpecific, resetQueue, removeQueueEnt
                 filteredWaitingQueue.map((person) => (
                   <div key={person.id} className="queue-card">
                     <div className="queue-info">
-                      <span className="queue-number">คิวที่ - {person.queueNumber}</span>
-                      <span className="queue-name">{person.name}</span>
+                      <span className="queue-number-admin">คิวที่ - {person.queueNumber}</span>
+                      <span className="queue-name-admin">{person.name}</span>
                     </div>
                     <div className="queue-actions">
                       <button
@@ -130,8 +130,8 @@ function AdminPage({ queue, admitNext, admitSpecific, resetQueue, removeQueueEnt
                 filteredAdmittedQueue.map((person) => (
                   <div key={person.id} className="queue-card admitted-card">
                     <div className="queue-info">
-                      <span className="queue-number">คิวที่ - {person.queueNumber}</span>
-                      <span className="queue-name">{person.name}</span>
+                      <span className="queue-number-admin">คิวที่ - {person.queueNumber}</span>
+                      <span className="queue-name-admin">{person.name}</span>
                       {/* <span className="queue-email">({person.email})</span> */}
                     </div>
                     <div className="queue-actions">

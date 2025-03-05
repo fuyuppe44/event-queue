@@ -173,7 +173,7 @@ button:hover:not(:disabled) {
 .footer {
   background-color: #003087; /* Dark blue */
   color: white;
-  padding: 15px;
+  padding: 19px;
   text-align: center;
   font-size: 14px;
   margin-top: auto; /* Pushes footer to bottom */
@@ -538,10 +538,13 @@ button:hover:not(:disabled) {
 }
 
 .queue-display-page {
+  /* display: flex; */
   font-family: Arial, sans-serif;
-  background-color: #f5f5f5;
+  background-color: #f5f6f5; /* Light gray background */
   min-height: 100vh;
-  padding: 20px;
+  flex-direction: column;
+  /* padding: 20px; */
+  flex-direction: column;
 }
 
 /* Main Content */
@@ -587,7 +590,7 @@ button:hover:not(:disabled) {
 }
 
 .queue-name {
-  font-size: 28px;
+  font-size: 32px;
   margin-top: 10px;
   font-weight: bold;
 }
@@ -608,6 +611,7 @@ button:hover:not(:disabled) {
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 100px;
 }
 
 .queue-list-section h2 {
@@ -665,4 +669,5 @@ button:hover:not(:disabled) {
   font-size: 25px;
   margin-top: 10px;
   color: white;
+  font-weight: bold;
 }

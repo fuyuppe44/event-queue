@@ -33,7 +33,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    document.title = 'ระบบแสดงคิว';
+    document.title = 'ระบบจัดการคิว';
   }, []); 
 
   useEffect(() => {

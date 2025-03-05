@@ -36,7 +36,7 @@ function DisplayPage({ queue, user, lastAction }) {
             className="header-logo"
             onError={(e) => e.target.src = 'https://via.placeholder.com/150x50?text=MOF+Logo'}
           />
-          <h1>Queue Management / การจัดการคิว</h1>
+          <h1>Queue Display / การแสดงคิว</h1>
         </div>
       </header>
 
@@ -87,7 +87,11 @@ function DisplayPage({ queue, user, lastAction }) {
           </div>
         </div>
       </div>
+      <footer className="footer">
+        <p>กระทรวงการคลัง (Ministry of Finance Thailand) | ติดต่อเรา: info@mof.go.th | อัปเดตเมื่อ: {new Date().toLocaleDateString('th-TH')}</p>
+      </footer>
     </div>
+    
   );
 }
 
