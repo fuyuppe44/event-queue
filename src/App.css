@@ -86,15 +86,17 @@ button:hover:not(:disabled) {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20px;
-  max-width: 1200px;
+  gap: 10px;
+  max-width: 1800px;
   margin: 0 auto;
   flex-wrap: wrap;
 }
 
 .header-logo {
-  height: 50px; /* Adjust based on logo size */
+  height: 100px; /* Adjust based on logo size */
   width: auto;
+  margin-right: auto; /* Push everything else to the right */
+  margin-left: 0%;
 }
 
 .header h1 {
@@ -398,15 +400,16 @@ button:hover:not(:disabled) {
   flex-grow: 1;
 }
 
-.queue-number {
+.queue-number-admin {
   font-weight: bold;
   color: #003087;
 }
 
-.queue-name {
+.queue-name-admin {
   margin-left: 10px;
   font-weight: 500;
 }
+
 
 .queue-email {
   margin-left: 10px;
@@ -534,3 +537,132 @@ button:hover:not(:disabled) {
   animation-iteration-count: 5; /* 1s * 3 = 3 seconds */
 }
 
+.queue-display-page {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* Main Content */
+.queue-content {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  max-width: 900px;
+  min-height: 50vh;
+  margin-left: auto;
+  margin-right: auto;
+  align-items: baseline;
+}
+
+/* Now Serving Section */
+.now-serving-section {
+  flex: 1;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  margin: 20px;
+  /* margin-top: -270px; */
+}
+
+.now-serving-section h2 {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.now-serving-box {
+  background-color: #0056b3; /* Green like the image */
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.queue-number {
+  font-size: 48px;
+  font-weight: bold;
+  color: white;
+}
+
+.queue-name {
+  font-size: 28px;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.highlight {
+  animation: pulse 1s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* Queue List Section */
+.queue-list-section {
+  flex: 1;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.queue-list-section h2 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.queue-list {
+  list-style: none;
+  padding: 0;
+  max-height: 500px; /* Limit height, scroll if needed */
+  overflow-y: auto;
+}
+
+.queue-item {
+  font-size: 18px;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.queue-item:last-child {
+  border-bottom: none;
+}
+
+/* Next Queue Section */
+.next-queue-section {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.next-queue-section h2 {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.next-queue-box {
+  background-color: #ffc107; /* Yellow */
+  color: #333;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.queue-number-next {
+  font-size: 28px;
+  font-weight: bold;
+  color: white;
+}
+
+.queue-name-next {
+  font-size: 25px;
+  margin-top: 10px;
+  color: white;
+}

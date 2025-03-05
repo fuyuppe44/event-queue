@@ -5,32 +5,29 @@ function DisplayPage({ queue, user, lastAction }) {
   const [highlight, setHighlight] = useState(false);
 
   const waitingQueue = queue.filter(person => person.status === 'waiting');
-  const displayedWaitingQueue = waitingQueue.slice(0, 10);
+  const nextQueue = waitingQueue.length > 0 ? waitingQueue[0] : null; // First in waiting queue
+  const displayedWaitingQueue = waitingQueue.slice(1, 11); // Rest of queue, limit to 5
 
-  // Filter users who are currently admitted (exclude recalled users with status 'waiting')
+  // Find the most recently admitted user
   const currentlyAdmitted = queue.filter(person => person.status === 'admitted' && person.was_admitted);
-
-  // Find the most recently admitted user among those currently admitted
   const lastAdmitted = currentlyAdmitted.length > 0 
     ? currentlyAdmitted.reduce((latest, current) => 
         new Date(current.last_updated) > new Date(latest.last_updated) ? current : latest
       )
     : null;
 
-  const position = waitingQueue.findIndex(p => p.queueNumber === user?.queueNumber) + 1;
-
-  // Trigger highlight effect only when action is 'admit'
+  // Highlight effect for "Now Serving"
   useEffect(() => {
     if (lastAction === 'admit' && lastAdmitted) {
       setHighlight(true);
-      const timer = setTimeout(() => setHighlight(false), 3000); // 3 seconds
-      return () => clearTimeout(timer); // Cleanup
+      const timer = setTimeout(() => setHighlight(false), 3000);
+      return () => clearTimeout(timer);
     }
-  }, [lastAction, lastAdmitted]); // Depend on lastAction and lastAdmitted
+  }, [lastAction, lastAdmitted]);
 
   return (
-    <div className="display-page">
-      {/* Header with MOF Logo */}
+    <div className="queue-display-page">
+      {/* Header */}
       <header className="header">
         <div className="header-container">
           <img
@@ -39,72 +36,57 @@ function DisplayPage({ queue, user, lastAction }) {
             className="header-logo"
             onError={(e) => e.target.src = 'https://via.placeholder.com/150x50?text=MOF+Logo'}
           />
-          <h1>Queue Display / การแสดงคิว</h1>
+          <h1>Queue Management / การจัดการคิว</h1>
         </div>
       </header>
-      
+
       {/* Main Content */}
-      <main className="main-content">
-        {user && (
-          <section className="status-section">
-            <h2 className="section-title">สถานะของคุณ (Your Status)</h2>
-            <div className="status-card">
-              {user.status === 'your-turn' ? (
-                <p>ถึงคิวคุณแล้ว! กรุณาดำเนินการไปยังจุดเข้า (Your turn! Please proceed to the entrance.) <br />Queue #{user.queueNumber}</p>
-              ) : user.status === 'admitted' ? (
-                <p>คุณได้รับการรับเข้าแล้ว! (You’ve been admitted!) <br />Queue #{user.queueNumber}</p>
-              ) : (
-                <div>
-                  <p><strong>ชื่อ (Name):</strong> {user.name}</p>
-                  <p><strong>หมายเลขคิว (Queue Number):</strong> {user.queueNumber}</p>
-                  <p><strong>ตำแหน่งในคิว (Position in Line):</strong> {position > 0 ? position : 'กำลังดำเนินการ (Processing...)'}</p>
-                  <p><strong>เวลาคาดการณ์ (Estimated Wait):</strong> {position > 0 ? `${position * 5} วินาที (seconds)` : 'ใกล้ถึงแล้ว! (Almost there!)'}</p>
-                </div>
-              )}
-            </div>
-          </section>
-        )}
-
-        <section className="queue-section">
-          <h2 className="section-title">ลำดับคิวที่รอพบท่านปลัด</h2>
-          {displayedWaitingQueue.length > 0 ? (
-            <ul className="queue-list">
-              {displayedWaitingQueue.map(person => (
-                <li key={person.queueNumber} className="queue-item">
-                  {person.queueNumber === user?.queueNumber
-                    ? 'คุณ (You)'
-                    : `คิวที่ - ${person.queueNumber}`} - {person.name}
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p className="empty-message">ไม่มีผู้รอในคิว! (No one waiting in the queue!)</p>
-          )}
-        </section>
-
-        <section className="admitted-section">
-          <h2 className="section-title">คิวที่กำลังเข้าพบท่านปลัด</h2>
+      <div className="queue-content">
+        {/* Left Section: Now Serving */}
+        <div className="now-serving-section">
+          <h2>Now Serving / กำลังเข้าพบ</h2>
           {lastAdmitted ? (
-            <ul className="admitted-list">
-              <li className={`admitted-item ${highlight ? 'blink-highlight' : ''}`}>
-                {lastAdmitted.queueNumber === user?.queueNumber
-                  ? 'คุณ (You)'
-                  : `คิวที่ - ${lastAdmitted.queueNumber}`}
-                {' - '}
-                {lastAdmitted.name}
-                {' (กำลังเข้าพบ)'}
-              </li>
-            </ul>
+            <div className={`now-serving-box ${highlight ? 'highlight' : ''}`}>
+              <div className="queue-number">คิวที่ {lastAdmitted.queueNumber}</div>
+              <div className="queue-name">{lastAdmitted.name}</div>
+            </div>
           ) : (
-            <p className="empty-message">ยังไม่มีผู้ได้รับการเข้าพบ! (No one has been admitted yet!)</p>
+            <p>No one currently being served / ไม่มีผู้เข้าพบอยู่ในขณะนี้</p>
           )}
-        </section>
-      </main>
+        </div>
 
-      {/* Footer */}
-      <footer className="footer">
-        <p>กระทรวงการคลัง (Ministry of Finance Thailand) | ติดต่อเรา: info@mof.go.th | อัปเดตเมื่อ: {new Date().toLocaleDateString('th-TH')}</p>
-      </footer>
+        {/* Right Section: Next Queue and Queue List */}
+        <div className="queue-list-container">
+          {/* Next Queue List */}
+          <div className="next-queue-section">
+            <h2>Next Queue / คิวถัดไป</h2>
+            {nextQueue ? (
+              <div className="next-queue-box">
+                <div className="queue-number-next">คิวที่ {nextQueue.queueNumber}</div>
+                <div className="queue-name-next">{nextQueue.name}</div>
+              </div>
+            ) : (
+              <p>No next queue / ไม่มีคิวถัดไป</p>
+            )}
+          </div>
+
+          {/* Queue List */}
+          <div className="queue-list-section">
+            <h2>Queue List / รายการคิว</h2>
+            {displayedWaitingQueue.length > 0 ? (
+              <ul className="queue-list">
+                {displayedWaitingQueue.map(person => (
+                  <li key={person.queueNumber} className="queue-item">
+                    คิวที่ {person.queueNumber} - {person.name}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p>No one waiting / ไม่มีผู้รอคิว</p>
+            )}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
